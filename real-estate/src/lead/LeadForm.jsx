@@ -7,14 +7,22 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
 import authFetch from "../custom"
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import { useEffect } from "react";
 
-const LeadForm = () => {
+const LeadForm = (props) => {
+  const { id, setid } = props;
+
+  useEffect(() => {
+    authFetch.get(`/lead/view/${id[0]}`).then((y) => {
+      formik.setValues(y.data.lead);
+    });
+  }, [id]);
+
   const validationSchema = yup.object({
     leadStatus: yup
       .string("Enter lead status")
