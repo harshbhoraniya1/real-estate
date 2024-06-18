@@ -80,7 +80,9 @@ export default function LeadGrid() {
             paginationModel: { page: 0, pageSize: 5 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
         
       />
 
@@ -99,7 +101,8 @@ export default function LeadGrid() {
           },
         }}
       >
-       <menuItem onClick={handleClose}>Delete</menuItem>
+       <MenuItem onClick={handleClose}>Delete</MenuItem>
+       <MenuItem onClick={handleClose}>Edit</MenuItem>
       </Menu>
     </div>
   )
