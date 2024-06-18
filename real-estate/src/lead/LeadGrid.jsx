@@ -136,7 +136,7 @@ export default function LeadGrid(props) {
           },
         }}
       >
-       <MenuItem onClick={handleClose}>Edit</MenuItem>
+       <MenuItem onClick={manageEdit}>Edit</MenuItem>
        <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
       </Menu>
       <Dialog
