@@ -18,6 +18,7 @@ const LeadForm = (props) => {
   const { id, setid } = props;
 
   useEffect(() => {
+    
     authFetch.get(`/lead/view/${id[0]}`).then((y) => {
       formik.setValues(y.data.lead);
     });

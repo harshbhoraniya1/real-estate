@@ -6,19 +6,25 @@ import ContactGrid from './ContactGrid';
 
 export default function Contact() {
 
-    const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [id, setid] = React.useState([]);
 
-    const toggleDrawer = (newOpen) => () => {
-      setOpen(newOpen);
-    };
+const toggleDrawer = (newOpen) => () => {
+  setOpen(newOpen);
+};
+
+const opende =() => {
+
+  setOpen(true);
+}
 
   return (
     <div>
-    <Button onClick={toggleDrawer(true)}>Open drawer</Button>
-      <Drawer open={open} onClose={toggleDrawer(false)} anchor='right'>
-    <ContactForm/>
+    <ContactGrid open1={open} id={id} setid={setid} opende={opende}/>
+    <Button onClick={toggleDrawer(true)}>Add Contact</Button>
+      <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
+    <ContactForm id={id} setid={setid}/>
       </Drawer>
-    <ContactGrid/>
     </div>
   )
 }

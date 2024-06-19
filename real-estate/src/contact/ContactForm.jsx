@@ -8,9 +8,19 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import authFetch from "../custom"
+import authFetch from "../custom";
+import { useEffect } from "react";
 
-export default function ContactForm() {
+export default function ContactForm(props) {
+  const { id, setid } = props;
+
+  useEffect(() => {
+    
+    authFetch.get(`/lead/view/${id[0]}`).then((y) => {
+      formik.setValues(y.data.lead);
+    });
+  }, [id]);
+
 
     const validationSchema = yup.object({
         email: yup
@@ -28,11 +38,12 @@ export default function ContactForm() {
         initialValues: {
           email: "",
           phoneNumber: "",
+          moduleId :"6666887a29d4bf61c12606f8",
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
           try {
-            authFetch.get("/contact/", values)
+            authFetch.post("/form/add", values)
               .then((response) => {
                 console.log(response.data);
               });

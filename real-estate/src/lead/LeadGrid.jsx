@@ -11,12 +11,21 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { blue, red } from '@mui/material/colors';
 
 
 
 export default function LeadGrid(props) {
   const columns = [
     { field: '_id', headerName: 'Id', width: 130 },
+    {
+      field: 'leadStatus',
+      headerName: 'leadStatus',
+      type: 'text',
+      width: 90,
+    },
     { field: 'leadName', headerName: 'leadName', width: 130 },
     { field: 'leadEmail', headerName: 'leadEmail', width: 200 },
     {
@@ -24,12 +33,6 @@ export default function LeadGrid(props) {
       headerName: 'leadPhoneNumber',
       type: 'number',
       width: 110,
-    },
-    {
-      field: 'leadStatus',
-      headerName: 'leadStatus',
-      type: 'text',
-      width: 90,
     },
     {
       field:'',
@@ -44,7 +47,8 @@ export default function LeadGrid(props) {
         aria-haspopup="true"
         onClick={(event) => {
               handleClick(event, params);
-            }}
+            }
+      }
       >
         <MoreVertIcon />
       </IconButton>
@@ -136,8 +140,12 @@ export default function LeadGrid(props) {
           },
         }}
       >
-       <MenuItem onClick={manageEdit}>Edit</MenuItem>
-       <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
+       <MenuItem onClick={manageEdit} >
+       <EditNoteIcon sx={{ color: blue[400] }} />
+       Edit</MenuItem>
+       <MenuItem onClick={handleDeleteOpen}>
+       <DeleteIcon sx={{ color: red[700] }} />
+       Delete</MenuItem>
       </Menu>
       <Dialog
         open={dopen}
@@ -151,9 +159,9 @@ export default function LeadGrid(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={dhandleClose}>no</Button>
+          <Button onClick={dhandleClose}>Cancel</Button>
           <Button onClick={deleteData} autoFocus>
-            yes
+            ok
           </Button>
         </DialogActions>
       </Dialog>

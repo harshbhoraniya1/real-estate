@@ -7,6 +7,6 @@ import Contact from './contact/Contact'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Lead />
+    <Contact />
   </React.StrictMode>,
 )
