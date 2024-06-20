@@ -3,8 +3,12 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, TextField } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+
+  const anav = useNavigate();
+
     const validationSchema = yup.object({
         username: yup
           .string('Enter your email')
@@ -27,6 +31,10 @@ export default function Login() {
             .then(y=>{
                 localStorage.setItem("userInfo", JSON.stringify(y.data));
                 console.log(y.data);
+
+                if(y.status == 200 || y.status == 201){
+                  anav("/lead");
+                }
             })
             
         },
