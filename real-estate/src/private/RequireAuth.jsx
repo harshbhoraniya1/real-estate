@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom";
 export default function RequireAuth({ children }) {
-    const  currentUser  = localStorage.getItem("token");
+    const  currentUser  = localStorage.getItem("userInfo");
 
-  return currentUser? children :  <Navigate to="/" replace={true} />;
+  return currentUser? children :  <Navigate to="/" replace />;
   
    
   }

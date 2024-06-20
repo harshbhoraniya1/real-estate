@@ -15,14 +15,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { useEffect } from "react";
 
 const LeadForm = (props) => {
-  const { id, setid } = props;
+  const { id, setid ,open , opende , action, setAction} = props;
 
-  useEffect(() => {
-    
-    authFetch.get(`/lead/view/${id[0]}`).then((y) => {
-      formik.setValues(y.data.lead);
-    });
-  }, [id]);
+
 
   const validationSchema = yup.object({
     leadStatus: yup
@@ -52,10 +47,17 @@ const LeadForm = (props) => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       try {
+        if(action == 'add'){
         authFetch.post("/form/add", values)
           .then((response) => {
             console.log(response.data);
           });
+        }
+        else{
+          authFetch.put(`/form/edit/${id[0]}`, values).then((y) => {
+            console.log(y.data);
+          });
+        }
       } catch (error) {
         console.error(error);
       }

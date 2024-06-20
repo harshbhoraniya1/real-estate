@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 import Login from './Login'
 import Lead from './lead/Lead'
+import RequireAuth from './private/RequireAuth'
 
 export default function App() {
   return (
@@ -17,7 +18,7 @@ export default function App() {
         </ul>
         <Routes>
             <Route path='/' element={<Login />}></Route>
-            <Route path='/lead' element={<Lead />}></Route>
+            <Route path='/lead' element={<RequireAuth> <Lead /> </RequireAuth>}></Route>
         </Routes>
     </>
   )

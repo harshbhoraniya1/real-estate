@@ -58,7 +58,7 @@ export default function LeadGrid(props) {
     },
   ];
 
-  const { open1, id, setid, opende } = props;
+  const { open1, id, setid, opende, action , setAction } = props;
   const [data, setData] = useState([]);
   const [dopen, dsetOpen] = React.useState(false);
 
@@ -105,8 +105,10 @@ export default function LeadGrid(props) {
   };
 
   const manageEdit = (e) => {
+    setAction('edit')
     opende();
     handleClose();
+    // console.log(e.id);
   };
  
   return (
@@ -119,7 +121,7 @@ export default function LeadGrid(props) {
             paginationModel: { page: 0, pageSize: 5 },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[5, 10]}
         checkboxSelection
         disableRowSelectionOnClick
         
