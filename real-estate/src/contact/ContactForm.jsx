@@ -14,12 +14,7 @@ import { useEffect } from "react";
 export default function ContactForm(props) {
   const { id, setid, action, setAction, open1, setOpen } = props;
 
-  useEffect(() => {
-    
-    authFetch.get(`/lead/view/${id[0]}`).then((y) => {
-      formik.setValues(y.data.lead);
-    });
-  }, [id]);
+  
 
 
     const validationSchema = yup.object({
