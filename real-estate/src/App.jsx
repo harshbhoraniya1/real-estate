@@ -10,15 +10,15 @@ export default function App() {
 
         <ul>
         <li>
-                <Link to='/' >Login</Link>
-            </li>
-            <li>
-                <Link to='/lead' >Lead</Link>
-            </li>
+          <Link to='/' >Login</Link>
+        </li>
+        <li>
+          <Link to='/lead' >Lead</Link>
+        </li>
         </ul>
         <Routes>
-            <Route path='/' element={<Login />}></Route>
-            <Route path='/lead' element={<RequireAuth> <Lead /> </RequireAuth>}></Route>
+          <Route path='/' element={<Login />}></Route>
+          <Route path='/lead' element={<RequireAuth> <Lead /> </RequireAuth>}></Route>
         </Routes>
     </>
   )

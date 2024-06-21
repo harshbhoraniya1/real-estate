@@ -22,11 +22,16 @@ export default function Lead() {
   
   return (
     <div>
+
       <LeadGrid open1={open} id={id} setid={setid} opende={opende} action={action} setAction={setAction}/>
+
     <Button onClick={toggleDrawer(true)}>Add lead</Button>
+
     <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
+    
         <LeadForm  id={id} setid={setid} open={open} opende={opende} action={action} setAction={setAction}/>
-      </Drawer>
+
+    </Drawer>
     </div>
   )
 }

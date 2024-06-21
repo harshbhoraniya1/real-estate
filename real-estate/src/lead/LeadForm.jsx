@@ -12,7 +12,6 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import { useEffect } from "react";
 
 const LeadForm = (props) => {
   const { id, setid ,open , opende , action, setAction} = props;
