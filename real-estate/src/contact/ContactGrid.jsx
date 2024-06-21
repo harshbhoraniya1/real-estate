@@ -51,15 +51,9 @@ export default function ContactGrid(props) {
       
   const [data,setData] = useState([]);
 
-  useEffect(()=>{
-    authFetch.get("/contact").then(y=>{
-      setData(y.data.map((v)=>{
-        return{...v,id:v._id};
-      }));
-    })
-  },[]);
+  
 
-  const { open1, id, setid, opende } = props;
+  const { open1, id, setid, opende, action, setAction } = props;
   const [dopen, dsetOpen] = React.useState(false);
 
   const dhandleClose = () => {
@@ -86,7 +80,7 @@ export default function ContactGrid(props) {
         })
       );
     });
-  }, [dopen, open1]);
+  }, [dopen, open1 ]);
 
   
 
@@ -105,6 +99,7 @@ export default function ContactGrid(props) {
   };
 
   const manageEdit = (e) => {
+    setAction('edit');
     opende();
     handleClose();
   };
@@ -120,6 +115,8 @@ export default function ContactGrid(props) {
           },
         }}
         pageSizeOptions={[5, 10]}
+        checkboxSelection
+        disableRowSelectionOnClick
         
       />
       <Menu

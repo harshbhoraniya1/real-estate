@@ -29,7 +29,7 @@ export default function Lead() {
 
     <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
     
-        <LeadForm  id={id} setid={setid} open={open} opende={opende} action={action} setAction={setAction}/>
+        <LeadForm  id={id} setid={setid} open={open} opende={opende} action={action} setAction={setAction} setOpen={setOpen}/>
 
     </Drawer>
     </div>

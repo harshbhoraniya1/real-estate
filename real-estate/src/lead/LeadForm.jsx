@@ -14,7 +14,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
 const LeadForm = (props) => {
-  const { id, setid ,open , opende , action, setAction} = props;
+  const { id, setid ,open , opende , action, setAction, setOpen} = props;
 
 
 
@@ -57,6 +57,7 @@ const LeadForm = (props) => {
             console.log(y.data);
           });
         }
+        setOpen(false);
       } catch (error) {
         console.error(error);
       }

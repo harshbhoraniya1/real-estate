@@ -12,7 +12,7 @@ import authFetch from "../custom";
 import { useEffect } from "react";
 
 export default function ContactForm(props) {
-  const { id, setid } = props;
+  const { id, setid, action, setAction, open1, setOpen } = props;
 
   useEffect(() => {
     
@@ -43,10 +43,19 @@ export default function ContactForm(props) {
         validationSchema: validationSchema,
         onSubmit: (values) => {
           try {
+            if(action == 'add') {
             authFetch.post("/form/add", values)
               .then((response) => {
                 console.log(response.data);
               });
+            }
+            else{
+              authFetch.put(`/form/edit/${id}`, values)
+              .then((response) => {
+                console.log(response.data);
+              });
+            }
+            setOpen(false);
           } catch (error) {
             console.error(error);
           }
