@@ -9,12 +9,14 @@ export default function Lead() {
   const [id, setid] = React.useState([]);
   const [action, setAction] = React.useState("");
 
+  // ------------ for Open Form Drower --------------------
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
 
     setAction("add");
   };
 
+  // ------------ for Open Delete Model --------------------
   const opende = () => {
     setOpen(true);
   };
