@@ -16,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 const LeadForm = (props) => {
   const { id, setid, open, opende, action, setAction, setOpen } = props;
 
-  // ------------ for Validation --------------------
+  // ------------ for Validation -------------------
   const validationSchema = yup.object({
     leadStatus: yup
       .string("Enter lead status")

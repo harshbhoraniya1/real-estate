@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@mui/material";
 import LeadForm from "./LeadForm";
 import LeadGrid from "./LeadGrid";
 import Drawer from "@mui/material/Drawer";
@@ -30,10 +29,10 @@ export default function Lead() {
         opende={opende}
         action={action}
         setAction={setAction}
+        toggleDrawer={toggleDrawer}
       />
 
-      <Button onClick={toggleDrawer(true)}>Add lead</Button>
-
+      
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         <LeadForm
           id={id}

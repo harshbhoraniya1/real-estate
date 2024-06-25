@@ -12,7 +12,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import Button from "@mui/material/Button";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { blue, red } from "@mui/material/colors";
+import { blue, red, grey } from "@mui/material/colors";
 import { Box } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -20,6 +20,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function LeadGrid(props) {
   // column for display grid
@@ -61,9 +62,8 @@ export default function LeadGrid(props) {
     },
   ];
 
-  const { open1, id, setid, opende, action, setAction } = props;
+  const { open1, id, setid, opende, action, setAction, toggleDrawer } = props;
   const [data, setData] = useState([]);
-  const [allData, setAllData] = useState([]);
   const [dopen, dsetOpen] = React.useState(false);
 
   // for open delete model
@@ -120,9 +120,7 @@ export default function LeadGrid(props) {
     handleClose();
   };
 
-  // ------------ for filter --------------------
-  const [filterData, setFilterData] = React.useState([]);
-
+  
   //-------------- search bar ------------------------------
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -172,6 +170,7 @@ export default function LeadGrid(props) {
 
   return (
     <>
+    {/* search bar */}
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
@@ -183,6 +182,12 @@ export default function LeadGrid(props) {
             >
               Leads({data.length})
             </Typography>
+
+            {id.length >= 1 && (
+              <Button onClick={handleDeleteOpen}>
+                <DeleteIcon sx={{ color: red[700] }} />
+              </Button>
+            )}
 
             <Search>
               <SearchIconWrapper>
@@ -202,17 +207,19 @@ export default function LeadGrid(props) {
                 }}
               />
             </Search>
-            {id.length >= 1 && (
-              <Button onClick={handleDeleteOpen}>
-                <DeleteIcon sx={{ color: red[700] }} />
-              </Button>
-            )}
+
+            <Button
+              variant="outlined"
+              sx={{ color: grey[50] }}
+              onClick={toggleDrawer(true)}
+            >
+              <AddIcon /> Add lead
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
 
       {/* display grid */}
-      {/* { id.length >=1 && <Button onClick={handleDeleteOpen}>Delete</Button> } */}
       <Box style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={data}
