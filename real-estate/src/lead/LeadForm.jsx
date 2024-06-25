@@ -7,16 +7,14 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import authFetch from "../custom"
-import Select from '@mui/material/Select';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+import authFetch from "../custom";
+import Select from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
 
 const LeadForm = (props) => {
-  const { id, setid ,open , opende , action, setAction, setOpen} = props;
-
-
+  const { id, setid, open, opende, action, setAction, setOpen } = props;
 
   const validationSchema = yup.object({
     leadStatus: yup
@@ -46,13 +44,11 @@ const LeadForm = (props) => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       try {
-        if(action == 'add'){
-        authFetch.post("/form/add", values)
-          .then((response) => {
+        if (action == "add") {
+          authFetch.post("/form/add", values).then((response) => {
             console.log(response.data);
           });
-        }
-        else{
+        } else {
           authFetch.put(`/form/edit/${id[0]}`, values).then((y) => {
             console.log(y.data);
           });
@@ -80,27 +76,28 @@ const LeadForm = (props) => {
             Lead Form
           </Typography>
           <form onSubmit={formik.handleSubmit}>
-
-          <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Lead Status</InputLabel>
-            <Select
-              fullWidth
-              id="leadStatus"
-              name="leadStatus"
-              label="Lead Status"
-              value={formik.values.leadStatus}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={
-                formik.touched.leadStatus && Boolean(formik.errors.leadStatus)
-              }
-              helperText={formik.touched.leadStatus && formik.errors.leadStatus}
-              margin="normal"
-            >
-            <MenuItem value={'Active'}>Active</MenuItem>
-            <MenuItem value={'Pending'}>Pending</MenuItem>
-            <MenuItem value={'Sold'}>Sold</MenuItem>
-            </Select>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Lead Status</InputLabel>
+              <Select
+                fullWidth
+                id="leadStatus"
+                name="leadStatus"
+                label="Lead Status"
+                value={formik.values.leadStatus}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.leadStatus && Boolean(formik.errors.leadStatus)
+                }
+                helperText={
+                  formik.touched.leadStatus && formik.errors.leadStatus
+                }
+                margin="normal"
+              >
+                <MenuItem value={"Active"}>Active</MenuItem>
+                <MenuItem value={"Pending"}>Pending</MenuItem>
+                <MenuItem value={"Sold"}>Sold</MenuItem>
+              </Select>
             </FormControl>
             <TextField
               fullWidth
