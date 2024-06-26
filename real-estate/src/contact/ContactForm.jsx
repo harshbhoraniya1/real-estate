@@ -8,13 +8,10 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import authFetch from "../custom";
-import Select from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
+import { useEffect } from "react";
 
 export default function ContactForm(props) {
-  const { id, setid, open, opende, action, setAction, setOpen } = props;
+  const { id, setid, open, opende, action, setAction, setOpen, toggleDrawer } = props;
 
   
 
@@ -30,6 +27,18 @@ export default function ContactForm(props) {
           .required("Lead phone number is required"),
       });
       const theme = createTheme();
+
+      useEffect(() => {
+        if (id.length > 0) {
+          authFetch.get(`contact/view/${id}`).then((y) => {
+            formik.setValues({
+              ...y.data.contact,
+              moduleId: formik.values.moduleId, 
+            });
+          });
+        }
+      }, [id, toggleDrawer]);
+    
     
       // ------------ for Form --------------------
       const formik = useFormik({

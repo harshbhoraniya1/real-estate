@@ -42,6 +42,7 @@ export default function Lead() {
           action={action}
           setAction={setAction}
           setOpen={setOpen}
+          toggleDrawer={toggleDrawer}
         />
       </Drawer>
     </div>

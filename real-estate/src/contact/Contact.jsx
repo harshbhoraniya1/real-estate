@@ -42,6 +42,7 @@ export default function Contact() {
           action={action}
           setAction={setAction}
           setOpen={setOpen}
+          toggleDrawer={toggleDrawer}
         />
       </Drawer>
     </div>

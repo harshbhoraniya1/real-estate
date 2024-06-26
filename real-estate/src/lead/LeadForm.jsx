@@ -12,9 +12,10 @@ import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import { useEffect } from "react";
 
 const LeadForm = (props) => {
-  const { id, setid, open, opende, action, setAction, setOpen } = props;
+  const { id, setid, open, opende, action, setAction, setOpen, toggleDrawer } = props;
 
   // ------------ for Validation -------------------
   const validationSchema = yup.object({
@@ -34,6 +35,18 @@ const LeadForm = (props) => {
   });
 
   const theme = createTheme();
+
+  useEffect(() => {
+    if (id.length > 0) {
+      authFetch.get(`lead/view/${id}`).then((y) => {
+        formik.setValues({
+          ...y.data.lead,
+          moduleId: formik.values.moduleId, 
+        });
+      });
+    }
+  }, [id, toggleDrawer]);
+
 
   // ------------ for Form --------------------
   const formik = useFormik({
