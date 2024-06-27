@@ -24,6 +24,8 @@ import AddIcon from "@mui/icons-material/Add";
 
 export default function ContactGrid(props) {
   const [term, serarchTerm] = useState("");
+
+  
   // column for display grid
   const columns = [
     { field: "email", headerName: "email", width: 130 },
