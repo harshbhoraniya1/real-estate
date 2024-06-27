@@ -21,8 +21,8 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
-
 export default function LeadGrid(props) {
+  const [term, serarchTerm] = useState("");
   // column for display grid
   const columns = [
     { field: "_id", headerName: "Id", width: 130 },
@@ -120,7 +120,6 @@ export default function LeadGrid(props) {
     handleClose();
   };
 
-  
   //-------------- search bar ------------------------------
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -170,7 +169,7 @@ export default function LeadGrid(props) {
 
   return (
     <>
-    {/* search bar */}
+      {/* search bar */}
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
@@ -196,7 +195,9 @@ export default function LeadGrid(props) {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
-                onBlur={(e) => {
+                value={term}
+                onInput={(e) => {
+                  serarchTerm(e.target.value);
                   setData(
                     data.filter((v) => {
                       return v.leadName
@@ -207,6 +208,22 @@ export default function LeadGrid(props) {
                 }}
               />
             </Search>
+
+            <Button
+              sx={{ color: red[400] }}
+              onClick={() => {
+                authFetch.get("/lead").then((y) => {
+                  setData(
+                    y.data.map((p) => {
+                      return { ...p, id: p._id };
+                    })
+                  );
+                });
+                serarchTerm("");
+              }}
+            >
+              clear
+            </Button>
 
             <Button
               variant="outlined"

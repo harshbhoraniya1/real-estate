@@ -22,40 +22,35 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 
-
 export default function ContactGrid(props) {
-
-    // column for display grid
-    const columns = [
-        { field: 'email', headerName: 'email', width: 130 },
-        { field: 'phoneNumber', headerName: 'phoneNumber', width: 200 },
-        {
-          field:'',
-          headerName: 'Action',
-          renderCell :(params)=>{
-            return (
-              <IconButton
+  const [term, serarchTerm] = useState("");
+  // column for display grid
+  const columns = [
+    { field: "email", headerName: "email", width: 130 },
+    { field: "phoneNumber", headerName: "phoneNumber", width: 200 },
+    {
+      field: "",
+      headerName: "Action",
+      renderCell: (params) => {
+        return (
+          <IconButton
             aria-label="more"
             id="long-button"
-            aria-controls={open ? 'long-menu' : undefined}
-            aria-expanded={open ? 'true' : undefined}
+            aria-controls={open ? "long-menu" : undefined}
+            aria-expanded={open ? "true" : undefined}
             aria-haspopup="true"
             onClick={(event) => {
-                  handleClick(event, params);
-                }
-          }
+              handleClick(event, params);
+            }}
           >
             <MoreVertIcon />
           </IconButton>
-            )
-          }
-    
-        },
-        
-      ];
+        );
+      },
+    },
+  ];
 
-      
-  const [data,setData] = useState([]);
+  const [data, setData] = useState([]);
   const { open1, id, setid, opende, action, setAction, toggleDrawer } = props;
   const [dopen, dsetOpen] = React.useState(false);
 
@@ -88,10 +83,9 @@ export default function ContactGrid(props) {
         })
       );
     });
-  }, [dopen, open1 ]);
+  }, [dopen, open1]);
 
-  
-// for box
+  // for box
   const ITEM_HEIGHT = 48;
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -108,7 +102,7 @@ export default function ContactGrid(props) {
 
   // for open edit model
   const manageEdit = (e) => {
-    setAction('edit');
+    setAction("edit");
     opende();
     handleClose();
   };
@@ -158,11 +152,11 @@ export default function ContactGrid(props) {
 
   // ------------ for Multiple delete --------------------
   const [rowSelectionModel, setRowSelectionModel] = React.useState([]);
-      
+
   return (
     <>
-    {/* search bar */}
-    <Box sx={{ flexGrow: 1 }}>
+      {/* search bar */}
+      <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
             <Typography
@@ -187,18 +181,35 @@ export default function ContactGrid(props) {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
-                onBlur={(e) => {
+                value={term}
+                onInput={(e) => {
                   setData(
                     data.filter((v) => {
-                      return v.leadName
+                      return v.email
                         .toLowerCase()
                         .includes(e.target.value.toLowerCase());
                     })
                   );
+                  serarchTerm(e.target.value);
                 }}
               />
             </Search>
 
+            <Button
+              sx={{ color: red[400] }}
+              onClick={() => {
+                authFetch.get("/contact").then((y) => {
+                  setData(
+                    y.data.map((p) => {
+                      return { ...p, id: p._id };
+                    })
+                  );
+                });
+                serarchTerm("");
+              }}
+            >
+              clear
+            </Button>
             <Button
               variant="outlined"
               sx={{ color: grey[50] }}
@@ -210,47 +221,48 @@ export default function ContactGrid(props) {
         </AppBar>
       </Box>
 
-    {/* display grid */}
-    <Box style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={data}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
-        onRowSelectionModelChange={(newRowSelectionModel) => {
+      {/* display grid */}
+      <Box style={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={data}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 },
+            },
+          }}
+          pageSizeOptions={[5, 10]}
+          checkboxSelection
+          onRowSelectionModelChange={(newRowSelectionModel) => {
             setid(newRowSelectionModel);
             console.log(newRowSelectionModel);
           }}
-        disableRowSelectionOnClick
-        
-      />
-      <Menu
-        id="long-menu"
-        MenuListProps={{
-          'aria-labelledby': 'long-button',
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
-          },
-        }}
-      >
-       <MenuItem onClick={manageEdit} >
-       <EditNoteIcon sx={{ color: blue[400] }} />
-       Edit</MenuItem>
-       <MenuItem onClick={handleDeleteOpen}>
-       <DeleteIcon sx={{ color: red[700] }} />
-       Delete</MenuItem>
-      </Menu>
+          disableRowSelectionOnClick
+        />
+        <Menu
+          id="long-menu"
+          MenuListProps={{
+            "aria-labelledby": "long-button",
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: ITEM_HEIGHT * 4.5,
+              width: "20ch",
+            },
+          }}
+        >
+          <MenuItem onClick={manageEdit}>
+            <EditNoteIcon sx={{ color: blue[400] }} />
+            Edit
+          </MenuItem>
+          <MenuItem onClick={handleDeleteOpen}>
+            <DeleteIcon sx={{ color: red[700] }} />
+            Delete
+          </MenuItem>
+        </Menu>
       </Box>
 
       {/* display action button */}
@@ -272,7 +284,6 @@ export default function ContactGrid(props) {
           </Button>
         </DialogActions>
       </Dialog>
-    
     </>
-  )
+  );
 }

@@ -4,6 +4,7 @@ import Login from "./Login";
 import Lead from "./lead/Lead";
 import RequireAuth from "./private/RequireAuth";
 import Contact from "./contact/Contact";
+import Meeting from "./meeting/Meeting";
 
 export default function App() {
   return (
@@ -18,6 +19,9 @@ export default function App() {
         <li>
           <Link to="/contact">Contact</Link>
         </li>
+        <li>
+          <Link to="/meeting">Meeting</Link>
+        </li>
       </ul>
       <Routes>
         <Route path="/" element={<Login />}></Route>
@@ -25,8 +29,8 @@ export default function App() {
           path="/lead"
           element={
             <RequireAuth>
-              {" "}
-              <Lead />{" "}
+              
+              <Lead />
             </RequireAuth>
           }
         ></Route>
@@ -34,8 +38,17 @@ export default function App() {
           path="/contact"
           element={
             <RequireAuth>
-              {" "}
-              <Contact />{" "}
+              
+              <Contact />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/meeting"
+          element={
+            <RequireAuth>
+              
+              <Meeting />
             </RequireAuth>
           }
         ></Route>
