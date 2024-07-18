@@ -158,7 +158,7 @@ export default function ContactGrid(props) {
   return (
     <>
       {/* search bar */}
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, width: '99%'}}>
         <AppBar position="static">
           <Toolbar>
             <Typography
@@ -224,7 +224,7 @@ export default function ContactGrid(props) {
       </Box>
 
       {/* display grid */}
-      <Box style={{ height: 400, width: "100%" }}>
+      <Box style={{ height: 400, width: "99%" }}>
         <DataGrid
           rows={data}
           columns={columns}

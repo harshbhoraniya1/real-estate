@@ -25,7 +25,7 @@ export default function LeadGrid(props) {
   const [term, serarchTerm] = useState("");
   // column for display grid
   const columns = [
-    { field: "_id", headerName: "Id", width: 130 },
+    { field: "_id", headerName: "Id", width: 210 },
     {
       field: "leadStatus",
       headerName: "leadStatus",
@@ -43,6 +43,7 @@ export default function LeadGrid(props) {
     {
       field: "",
       headerName: "Action",
+      width: 130,
       renderCell: (params) => {
         return (
           <IconButton
@@ -170,7 +171,7 @@ export default function LeadGrid(props) {
   return (
     <>
       {/* search bar */}
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, width: '99%' }}>
         <AppBar position="static">
           <Toolbar>
             <Typography
@@ -237,7 +238,7 @@ export default function LeadGrid(props) {
       </Box>
 
       {/* display grid */}
-      <Box style={{ height: 400, width: "100%" }}>
+      <Box style={{ height: 400, width: "99%" }}>
         <DataGrid
           rows={data}
           columns={columns}

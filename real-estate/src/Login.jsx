@@ -33,7 +33,7 @@ export default function Login() {
                 console.log(y.data);
 
                 if(y.status == 200 || y.status == 201){
-                  anav("/lead");
+                  anav("/dashboard/lead");
                 }
             })
             
